@@ -1,0 +1,90 @@
+-- THIS IS TO ADD USER TO THE TABLE 
+CREATE TABLE av_user(
+    uid INTEGER AUTO_INCREMENT,
+    PRIMARY KEY(uid),
+    name VARCHAR(200) NOT NULL,
+    gender CHAR(1) CHECK(gender IN ('M','F')),
+    email VARCHAR(250) UNIQUE
+);
+
+-- THIS IS TO ADD EVENT TO THE TABLE 
+CREATE TABLE av_event(
+    id INTEGER AUTO_INCREMENT,
+    PRIMARY KEY(id),
+    uid INTEGER NOT NULL,
+    name VARCHAR(200) NOT NULL,
+    occurence CHAR(7) CHECK(occurence IN('YEARLY','ONETIME')),
+    startDate DATE NOT NULL,
+    endDate DATE
+);
+
+
+-- This is to add user to av_user table 
+INSERT INTO av_user(name,gender,email)
+VALUES
+("Rahul","M","rahul16102002@gmail.com"),
+("Vijay","M","vijay30042004@gmail.com"),
+("Shreya", 'F',"s_shreya@gmail.com"),
+("Riya","F","r_riya@gmail.com"),
+("Daksh", 'M',"d_daksh@gmail.com"),
+("Anirudha",'M',"a_anni@gmail.com");
+
+-- SELECT *
+-- FROM av_user;
+
+-- This is to add event to av_event 
+INSERT INTO av_event(uid,name,occurence,startDate,endDate)
+VALUES 
+(1,"A","YEARLY","2021-11-01","2021-11-04"),
+(2,"B","YEARLY","2021-11-03","2021-11-06"),
+(3,"C","ONETIME","2021-11-06","2021-11-09"),
+(4,"D","YEARLY","2021-11-09","2021-11-12"),
+(5,"E","YEARLY","2021-11-12","2021-11-15"),
+(6,"F","ONETIME","2021-11-15","2021-11-18"),
+(7,"G","ONETIME","2021-11-18","2021-11-21"),
+(8,"H","YEARLY","2021-11-21","2021-11-24"),
+(9,"I","ONETIME","2021-11-24","2021-11-27"),
+(10,"J","YEARLY","2021-11-27","2021-11-30"),
+(11,"K","YEARLY","2021-12-01","2021-12-04"),
+(12,"L","ONETIME","2021-12-03","2021-12-06"),
+(13,"M","YEARLY","2021-12-06","2021-12-09"),
+(14,"N","ONETIME","2021-12-09","2021-12-12"),
+(15,"O","ONETIME","2021-12-12","2021-12-15"),
+(16,"P","YEARLY","2021-12-15","2021-12-18"),
+(17,"Q","YEARLY","2021-12-18","2021-12-21"),
+(18,"R","ONETIME","2021-12-21","2021-12-24"),
+(19,"S","YEARLY","2021-12-24","2021-12-27"),
+(20,"T","ONETIME","2021-12-27","2021-12-30");
+
+-- SELECT *
+-- FROM av_event;
+
+-- This is to get all the events in between the dates 
+SELECT *
+FROM av_event
+WHERE startDate>='2021-11-01' AND endDate<='2021-11-18';
+
+
+-- This is to get all the events with the uid's 
+SELECT *
+FROM av_event
+WHERE uid IN (1,2,6,8,9);
+
+
+-- This is to get the specific event with uid 
+SELECT *
+FROM av_event
+WHERE uid=4;
+
+
+
+-- This is to get the event with the given dates 
+SELECT  * 
+FROM av_event
+WHERE  startDate <= '2021-11-29' AND endDate >= '2021-11-29'
+   OR  startDate <= '2021-11-30' AND endDate >= '2021-11-30'
+   OR  startDate <= '2021-12-01' AND endDate >= '2021-12-01'
+   OR  startDate <= '2021-12-02' AND endDate >= '2021-12-02'
+   OR  startDate <= '2021-12-03' AND endDate >= '2021-12-03'
+   OR  startDate <= '2021-12-04' AND endDate >= '2021-12-04'
+   OR  startDate <= '2021-12-05' AND endDate >= '2021-12-05';
